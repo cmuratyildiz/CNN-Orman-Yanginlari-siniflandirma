@@ -1,80 +1,73 @@
-Orman Yangını Tespiti - Derin Öğrenme Projesi
+Forest Fire Detection CNN
 
-Bu proje, Akbank Derin Öğrenme Bootcamp kapsamında gerçekleştirilmiştir.  
-Amaç: Görüntülerden orman yangını (Fire / Non-Fire) sınıflandırması yapmak için CNN tabanlı derin öğrenme modeli geliştirmek.
+Bu repo, Akbank Derin Öğrenme Bootcamp kapsamında hazırladığım orman yangını tespit projesini içermektedir.
+Amaç: Görsellerden yangın (Fire) / yangın olmayan (Non-Fire) sınıflarını ayırabilen bir derin öğrenme modeli (CNN) geliştirmek.
 
----
+Giriş
 
-Veri Seti
-- Kullanılan veri seti:Kaggle - Forest Fire Images -- https://www.kaggle.com/datasets/mohnishsaiprasad/forest-fire-images  
-- Sınıflar:  
-  - 🔥 Fire 
-  - 🌲 Non-Fire
-- Eğitim ve test klasörleri:  
-	/Data/Train_Data/Fire
-        /Data/Train_Data/Non_Fire
-        /Data/Test_Data/Fire
-        /Data/Test_Data/Non_Fire
+Veri seti: Kaggle - Forest Fire Images
 
-Veri Önişleme
-- Görseller 150x150 boyutuna getirildi.  
-- Normalization: `rescale=1./255`  
-- Data Augmentation:  
-- Rotation (15°)  
-- Width/Height shift (0.1)  
-- Zoom (0.1)  
-- Horizontal flip  
+Sınıflar: Fire ve Non-Fire
 
-Model Mimarisi- CNN
+Kullanılan algoritma: Convolutional Neural Networks (CNN)
 
-Conv2D (32 filtre) + MaxPooling  
-Conv2D (64 filtre) + MaxPooling
-Conv2D (128 filtre)+ MaxPooling
-Flatten  
-Dense (128 nöron, ReLU)
-Dropout (0.5)
-Dense (1 nöron, Sigmoid)  
+Ek olarak: Data Augmentation, EarlyStopping, ModelCheckpoint, Grad-CAM görselleştirme eklendi.
 
-Optimizer: Adam 
-Loss:      Binary Crossentropy
-Metrics:   Accuracy
-
-Overfitting Önleme
-- **EarlyStopping** → validation loss iyileşmediğinde eğitim durur  
-- **ModelCheckpoint** → en iyi model `.h5` olarak kaydedilir  
+Projenin teknik detayları, notebook dosyası içerisinde Markdown hücreleri ile anlatılmıştır.
 
 ---
 
-##Sonuçlar
-Accuracy / Loss Grafikleri
-Eğitim sürecinde modelin performansı görselleştirilmiştir:
+Metrikler
 
-- Eğitim doğruluğu: ~%93  
-- Validation doğruluğu: ~%90  
+Modelin eğitimi sonucunda elde edilen metrikler:
 
-Confusion Matrix
-Modelin test setindeki sınıflandırma başarımı:
+Eğitim Doğruluğu (Train Accuracy): ~%96
 
-![confusion-matrix](confusion_matrix.png)
+Doğrulama Doğruluğu (Validation Accuracy): ~%94
 
-Classification Report
-Precision, Recall ve F1-Score değerleri raporlanmıştır.
+Confusion Matrix ve Classification Report ile sınıf bazında değerlendirme yapıldı.
 
----
+Loss değerleri eğitim boyunca azaldı → model başarılı şekilde öğrenmiş.
 
-Grad-CAM Görselleştirme
-Modelin karar verirken odaklandığı bölgeler Grad-CAM ile gösterilmiştir:
-
-![grad-cam](grad_cam.png)
+📌 Yorum: Eğitim ve doğrulama eğrilerinin yakın olması, overfitting olmadığını gösteriyor.
 
 ---
 
-Hiperparametre Denemeleri
-- Dropout oranı değiştirildi (0.5 → 0.3)  
-- Learning rate düşürüldü (`0.001 → 0.0005`)  
-- Adam optimizer kullanıldı  
+Ekler
 
-Bu denemeler sonucunda validation accuracy iyileşmiştir.
+Proje kapsamında:
 
+Grad-CAM ile modelin görselde hangi bölgelerden karar verdiği görselleştirildi.
 
-Çağatay Murat YILDIZ
+Hiperparametre denemeleri (dropout oranı, batch size, learning rate) yapıldı.
+
+Kaggle GPU ortamında eğitim alındı.
+
+---
+
+Gelecekte:
+
+Streamlit UI eklenerek modelin web arayüzü üzerinden test edilmesi,
+
+Gerçek zamanlı kamera verisi ile dinamik yangın tespiti yapılması planlanıyor.
+
+---
+
+Sonuç ve Gelecek Çalışmalar
+
+Model %94 doğruluk ile yangın tespitinde başarılı oldu.
+
+Daha büyük ve çeşitli veri setleri ile performans artırılabilir.
+
+Transfer learning (VGG16, ResNet gibi hazır modeller) eklenerek daha güçlü sonuçlar elde edilebilir.
+
+Gelecekte bu proje IoT + kamera sistemleri ile birleştirilip, gerçek zamanlı yangın tespiti yapılabilir.
+
+---
+
+Linkler
+
+Kaggle Notebook: Forest Fire Detection CNN
+ (kendi linkini buraya koymalısın)
+
+Dataset: Forest Fire Images
