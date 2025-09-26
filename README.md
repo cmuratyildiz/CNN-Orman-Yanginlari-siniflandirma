@@ -1,0 +1,2 @@
+# CNN Orman Yanginlari siniflandirma
+
